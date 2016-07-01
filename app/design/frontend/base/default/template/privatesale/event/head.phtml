@@ -1,0 +1,12 @@
+<script type="text/javascript">
+  Event.observe(window, 'load', function () {
+    <?php 
+    $customerGroup = Mage::getSingleton('customer/session')->getCustomerGroupId();
+    $productIds = Mage::helper('privatesale')->getListProductByCategory($customerGroup);
+    $configOption = Mage::helper('privatesale')->restrictedOptionConfig();
+    ?>
+    var obj = new Privatesale('<?php echo $configOption;?>', '<?php echo json_encode($productIds);?>');
+    obj.replaceButtonAddToCart('<?php echo $configOption;?>', '<?php echo json_encode($productIds);?>');
+  });
+
+</script>

@@ -1,0 +1,208 @@
+<?php
+/*
+* @copyright   Copyright ( c ) 2013 www.magebuzz.com
+*/
+?>
+<?php
+$customer = Mage::getSingleton('customer/session')->getCustomerRegisterData();
+?>
+<div id='customer-access'>
+  <div id="registered-user-login">
+    <div class="page-title">
+      <h1><?php echo $this->__('Login or Create an Account') ?></h1>
+    </div>
+    <div class="content">
+      <form action="<?php echo $this->actionFormLogin(); ?>" method="post" id="login-form-validate">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="col2-set">
+          <div class="col-1 new-users">
+            <div class="content">
+              <h4><?php echo $this->__("Don't you have an account?") ?> </h4>
+
+              <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
+
+              <div class="link-create-account">
+                <button type="button" class="button right" onclick="return submitPopupRegister();"
+                        title="<?php echo $this->__('Login') ?>" name="create_new_account" id="create-new-account">
+                  <span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-2 registered-users">
+            <div class="content">
+              <h4><?php echo $this->__("Sign In") ?> </h4>
+              <ul class="form-list">
+                <li>
+                  <div style="color: red;font-size: 11px;margin-left: 43px;" id="login_error"></div>
+                </li>
+                <li>
+                  <label for="emaillogin" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                  <input type="text" name="login[username]"
+                         value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="emaillogin"
+                         class="input-text required-entry validate-email"
+                         title="<?php echo $this->__('Email Address') ?>"/>
+                </li>
+                <li>
+                  <label for="passlogin" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                  <input type="password" name="login[password]" class="input-text required-entry validate-password"
+                         id="passlogin" title="<?php echo $this->__('Password') ?>"/>
+                </li>
+              </ul>
+              <div class="link-create-account">
+                <a href="javascript:void(0);" onclick="return showForgotForm();"
+                   class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                <button type="submit" class="button right" title="<?php echo $this->__('Login') ?>" name="sendlogin"
+                        id="sendlogin"><span><span><?php echo $this->__('Login') ?></span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="form-register" style="display:none;">
+    <div>
+      <div class="page-title">
+        <h1><?php echo $this->__('Create an Account') ?></h1>
+      </div>
+      <form action="<?php echo $this->actionFormRegister(); ?>" method="post" id="register-form">
+        <div style="color: green;font-size: 11px;margin-left: 43px;" id="register_success"></div>
+        <div class="content" id="register-content">
+          <ul class="form-list">
+            <li>
+              <div style="color: red;font-size: 11px;margin-left: 43px;" id="register_error"></div>
+              <div style="color: green;font-size: 11px;margin-left: 43px;" id="register_success"></div>
+            </li>
+            <li class="fields">
+              <div class="customer-name">
+                <div class="field name-firstname">
+                  <label class="required" for="firstname"><?php echo $this->__('First Name') ?><em>*</em></label>
+                  <input type="text" name="firstname" id="firstname" class="input-text required-entry"
+                         value="<?php echo $customer['firstname'] ?>" title="<?php echo $this->__('First Name') ?>"/>
+                </div>
+                <div class="field name-lastname">
+                  <label for="lastname" class="required"><?php echo $this->__('Last Name') ?><em>*</em></label>
+                  <input type="text" name="lastname" class="input-text required-entry" id="lastname"
+                         value="<?php echo $customer['lastname'] ?>" title="<?php echo $this->__('Last Name') ?>"/>
+                </div>
+                <div class="field">
+                  <label for="email-register" class="required"><?php echo $this->__('Email Address') ?>
+                    <em>*</em></label>
+                  <input type="text" name="email" id="email-register"
+                         class="input-text required-entry validate-email validate-check-mail"
+                         value="<?php echo $customer['email'] ?>" title="<?php echo $this->__('Email Address') ?>"/>
+                </div>
+                <?php if (Mage::getStoreConfig('privatesalesession/privatesale_options/open_sign_up') == '1') : ?>
+                  <div class="field">
+                    <label for="request_sign_up_code"
+                           class="required"><em>*</em><?php echo $this->__('Your sign up code') ?></label>
+
+                    <div class="input-box">
+                      <input type="text" name="sign_up_code" id="sign_up_code"
+                             title="<?php echo $this->__('Your sign up code') ?>" class="input-text required-entry"/>
+                      <a href="<?php echo $this->getUrl('privatesale/invite/waitinglist'); ?>"
+                         class="send-request-invitation fancybox.ajax"
+                         id="send-request-invitation"><?php echo $this->__('Request Invitation Code') ?></a>
+                    </div>
+                  </div>
+                <?php endif; ?>
+                <div class="field">
+                  <label for="pass-register" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
+                  <input type="password" value="" name="password" class="input-text required-entry validate-password"
+                         id="pass-register" title="<?php echo $this->__('Password') ?>"/>
+                </div>
+                <div class="field">
+                  <label for="confirmation" class="required"><?php echo $this->__('Confirm Password') ?>
+                    <em>*</em></label>
+                  <input type="password" value="" name="confirmation"
+                         title="<?php echo $this->__('Confirm Password') ?>" id="confirmation"
+                         class="input-text required-entry validate-cpassword"/>
+                </div>
+              </div>
+            </li>
+            <li class="control">
+              <div class="field">
+                <input type="checkbox" value="1" name="newletter"
+                       title="<?php echo $this->__('Sign Up for Newsletter') ?>" id="newletter"/>
+                <label><?php echo $this->__('Sign Up for Newsletter') ?></label>
+              </div>
+            </li>
+            <li>
+              <button type="submit" class="button" title="<?php echo $this->__('Sign Up Now') ?>" name="send"
+                      id="send2"><span><span><?php echo $this->__('Sign Up Now') ?></span></span></button>
+            </li>
+          </ul>
+          <div class="link-login">
+            <p><a href="javascript:void(0)" style="float: left"
+                  onclick="return submitLoginPopup();"><?php echo $this->__("&laquo; Back to Login") ?></a></p>
+          </div>
+        </div>
+    </div>
+    </form>
+  </div>
+  <div id="form-forgot" style="display: none;">
+    <div class="page-title">
+      <h1><?php echo $this->__('Forgot Your Password?') ?></h1>
+    </div>
+    <div class="message-forgot" id="message-forgot" style="font-size: 13px; color: green;"></div>
+    <form action="<?php echo $this->actionFormForgot(); ?>" method="post" id="forgot-form">
+      <div class="content" id="content">
+        <ul class="form-list">
+          <li>
+            <div style="color: red;font-size: 11px;margin-left: 43px;" id="forgot-error"></div>
+          </li>
+          <li>
+            <label for="email-forgot" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+
+            <div class="input-box">
+              <input type="text" name="email" id="email-forgot"
+                     class="input-text required-entry validate-email validate-check-mail"
+                     title="<?php echo $this->__('Email Address') ?>"/>
+            </div>
+          </li>
+          <li>
+            <button type="submit" class="button" title="<?php echo $this->__('Forgot Password') ?>" name="send"
+                    id="send2"><span><span><?php echo $this->__('Forgot Password') ?></span></span></button>
+          </li>
+        </ul>
+        <p><a href="javascript:void(0)" style="float: left"
+              onclick="return submitLoginPopup();"><?php echo $this->__("&laquo; Back to Login") ?></a></p>
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript">
+
+    //<![CDATA[
+    document.observe("dom:loaded", function () {
+      <?php $param = $this->getRequest()->getParam('register'); ?>
+      <?php if(isset($param)):?>
+      document.getElementById('registered-user-login').style.display = "none";
+      document.getElementById('form-register').style.display = "block";
+      document.getElementById('form-forgot').style.display = "none";
+      <?php endif;?>
+    });
+    var jQuery = jQuery.noConflict();
+    var dataForm = new VarienForm('register-form', true);
+    function submitLoginPopup() {
+      document.getElementById('registered-user-login').style.display = "block";
+      document.getElementById('form-register').style.display = "none";
+      document.getElementById('form-forgot').style.display = "none";
+    }
+    var dataForm = new VarienForm('login-form-validate', true);
+    function submitPopupRegister() {
+      document.getElementById('registered-user-login').style.display = "none";
+      document.getElementById('form-register').style.display = "block";
+      document.getElementById('form-forgot').style.display = "none";
+    }
+    var dataForm = new VarienForm('forgot-form', true);
+    function showForgotForm() {
+      document.getElementById('registered-user-login').style.display = "none";
+      document.getElementById('form-register').style.display = "none";
+      document.getElementById('form-forgot').style.display = "block";
+    }
+    jQuery(".send-request-invitation").fancybox();
+
+
+    //]]>
+  </script>
+</div>		

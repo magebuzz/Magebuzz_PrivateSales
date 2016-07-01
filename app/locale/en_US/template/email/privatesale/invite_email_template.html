@@ -1,0 +1,15 @@
+<!--@subject Your friend sends you an invitation for {{var store.getFrontendName()}} @-->
+<!--@vars
+{
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/create\"":"Customer Account Url"
+}
+@-->
+<p>Dear <b>{{var invited_customer_email}}</b>,</p>
+<p>Your friend, <b>{{var referer_name}}</b>, sent you an invitation to join {{var store.getFrontendName()}}.</p>
+<p>{{var message}}</p>
+<p>Please use the following invitation code to register at our website: <b>{{var invited_customer_sign_up_code}}</b>
+  <a href="{{var address}}">Click here</a> to start your registration. We would like to welcome you as our customers.
+</p>
+<p>Thanks you.</p>
+<p>{{var store.getFrontendName()}}</p>

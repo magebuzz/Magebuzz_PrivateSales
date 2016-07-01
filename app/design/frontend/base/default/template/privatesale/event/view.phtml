@@ -1,0 +1,4 @@
+<?php echo $this->getChildHtml('privatesale.view.information') ?>
+<?php if ($this->_isHappening()): ?>
+  <?php echo $this->getChildHtml('sale_private_list') ?>
+<?php endif; ?>

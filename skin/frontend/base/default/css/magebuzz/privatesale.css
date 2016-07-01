@@ -1,0 +1,276 @@
+/******* CSS FOR PRIVATE SALES EXTENSION *******/
+/* List Events */
+
+.privatesale-index-index .page-title {
+  text-align: center;
+}
+
+.list-events {
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.list-events .col2-set {
+}
+
+.list-events .col2-set .col-1 {
+  float: left;
+  width: 60.5%;
+}
+
+.list-events .col2-set .col-1 img {
+  border: 1px solid #cccccc;
+  max-width: 100%;
+}
+
+.list-events .col2-set .col-2 {
+  float: right;
+  width: 36.5%;
+}
+
+.list-events a {
+  color: #496EAD;
+  text-decoration: none;
+}
+
+.list-events li {
+  width: 100%;
+  float: left;
+  padding: 15px 0;
+  border-bottom: 1px dashed #CCCCCC;
+}
+
+.list-events .event-info li {
+  padding: 0;
+  border: 0 none;
+}
+
+.list-events .event-info tbody th, .list-events .event-info tbody td {
+  border-bottom: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+}
+
+.list-events .event-info .fields {
+  margin: 0 0 15px;
+}
+
+.list-events .event-info .fields .field {
+  border: 2px solid #CCCCCC;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 3px 3px 3px #C3C3C3;
+  float: left;
+  margin-right: 10px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.list-events .event-info .events-title h3 {
+  text-align: center;
+}
+
+.list-events .event-info .field p {
+  text-align: left;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+.list-events .event-info .fields .field label {
+  font-style: italic;
+}
+
+.list-events .event-info .fields .field h6 {
+  color: #496EAD;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.list-events .event-info {
+  width: 100%;
+  border-spacing: 0;
+  empty-cells: show;
+  font-size: 100%;
+}
+
+.list-events .event-info td {
+  padding: 3px 8px
+}
+
+.list-events .event-info td.label {
+  color: #464646;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Banner In Category Page */
+#event-banner {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+#event-banner .event-info {
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+#event-banner .event-info .content {
+  padding: 10px;
+  color: #000000;
+  text-align: center;
+  overflow: hidden;
+}
+
+#event-banner .event-info #title h3 {
+  color: #000000;
+}
+
+#event-banner .event-info #real_clock {
+  font-weight: bold;
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+#event-banner .event-info #day,
+#event-banner .event-info #hour,
+#event-banner .event-info #minute,
+#event-banner .event-info #second {
+  background: url(privatesale/bkg-timeleft.png);
+  color: #000000;
+  width: 35px;
+  height: 34px;
+  color: #cdcdcd;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 34px;
+}
+
+#event-banner > img {
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.timeleft {
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 34px;
+}
+
+/* List Event In Category Page */
+.event-banner {
+  position: relative;
+}
+
+.event-banner .event-info {
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+.event-banner .event-info .content {
+  padding: 10px;
+  color: #000000;
+  text-align: center;
+  overflow: hidden;
+}
+
+.event-banner .event-info #title h3 {
+  color: #000000;
+}
+
+.event-banner .event-info #real_clock {
+  font-weight: bold;
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.event-banner .event-info #day,
+.event-banner .event-info #hour,
+.event-banner .event-info #minute,
+.event-banner .event-info #second {
+  background: url(privatesale/bkg-timeleft.png);
+  color: #000000;
+  width: 35px;
+  height: 34px;
+  color: #cdcdcd;
+  font-size: 20px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 34px;
+}
+
+/* List Event in Homepage */
+.cms-index-index div.privatesale-events {
+  float: left;
+  text-align: center;
+  width: 100%;
+}
+
+.cms-index-index h3 {
+  color: #111111;
+  font-family: 'SCBGothicDemi';
+  font-weight: normal;
+  line-height: 1.25;
+}
+
+.cms-index-index div.privatesale-events ul {
+  list-style: none;
+  margin-bottom: 10px;
+  float: left;
+  width: 100%;
+}
+
+.cms-index-index div.privatesale-events ul li.item {
+  float: left;
+  padding: 6px;
+  width: 30%;
+  border: 1px solid #cccccc;
+}
+
+.cms-index-index div.privatesale-events ul li.item img {
+  max-width: 100%;
+}
+
+.cms-index-index div.privatesale-events ul li.item .new-description {
+  background: none repeat scroll 0 0 #f1f1f1;
+  overflow: hidden;
+}
+
+.cms-index-index div.privatesale-events ul li.item .title-events-privatesale {
+  background: none repeat scroll 0 0 #f1f1f1;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+}
+
+.cms-index-index div.privatesale-events ul li.item .image-information {
+  position: relative;
+}
+
+.price-save {
+  background: url("privatesale/i_save.png") no-repeat scroll left top transparent;
+  height: 90px;
+  line-height: 94px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 93px;
+}
+
+.information-time-left {
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px #c3c3c3;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 15px;
+}

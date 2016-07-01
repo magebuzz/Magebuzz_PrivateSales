@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <default>
+    <reference name="top.links">
+      <action method="addLink" translate="label title" module="privatesale"
+              ifconfig="privatesalesession/privatesale_options/show_event_top_link">
+        <label>Sale Events</label>
+        <url>privatesale</url>
+        <title>Sale Events</title>
+        <prepare>true</prepare>
+        <urlParams/>
+        <position>0</position>
+      </action>
+    </reference>
+    <reference name="head">
+      <action method="addCss">
+        <stylesheet>css/magebuzz/landing.css</stylesheet>
+      </action>
+      <action method="addCss">
+        <stylesheet>css/magebuzz/privatesale.css</stylesheet>
+      </action>
+      <action method="addJs" ifconfig="privatesalesession/privatesale_options/include_jquery">
+        <script>magebuzz/jquery/jquery-1.11.3.min.js</script>
+      </action>
+      <action method="addCss">
+        <stylesheet>css/magebuzz/jquery.fancybox.css</stylesheet>
+      </action>
+      <action method="addJs">
+        <script>magebuzz/privatesale/privatesale.js</script>
+      </action>
+      <action method="addJs">
+        <script>magebuzz/privatesale/fancybox/jquery.fancybox.js</script>
+      </action>
+      <block type='core/template' template="privatesale/event/head.phtml"/>
+    </reference>
+  </default>
+  <privatesale_index_index>
+    <reference name="head">
+      <action method="addCss">
+        <stylesheet>css/magebuzz/privatesale.css</stylesheet>
+      </action>
+      <action method="addJs">
+        <script>magebuzz/privatesale/privatesale.js</script>
+      </action>
+    </reference>
+    <reference name="root">
+      <action method="setTemplate">
+        <template>page/1column.phtml</template>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type='privatesale/privatesale' name="privatesale.view.all.events"
+             template="privatesale/event/allevents.phtml"/>
+    </reference>
+  </privatesale_index_index>
+  <customer_account_create>
+    <reference name="customer_form_register">
+      <action method="setTemplate">
+        <template>privatesale/customer/account/register.phtml</template>
+      </action>
+    </reference>
+  </customer_account_create>
+  <customer_account>
+    <reference name="customer_account_navigation">
+      <action method="addLink" translate="label" module="privatesale">
+        <name>privatesale</name>
+        <path>privatesale/invite/</path>
+        <label>Private Sale</label>
+      </action>
+    </reference>
+  </customer_account>
+  <privatesale_invite_index>
+    <reference name="content">
+      <block type='privatesale/invite' name="privatesale.invite.status" template="privatesale/invite/invite.phtml"/>
+      <block type='privatesale/invite' name="privatesale.invite.form" template="privatesale/invite/inviteform.phtml"/>
+      <block type='privatesale/invite' name="privatesale.invite.subcribe"
+             template="privatesale/invite/subscribe-event.phtml"/>
+    </reference>
+    <update handle="customer_account"/>
+  </privatesale_invite_index>
+  <privatesale_invite_waitinglist>
+    <reference name="content">
+      <block type="privatesale/invite" name="root" output="toHtml" template="privatesale/invite/waiting.phtml"/>
+    </reference>
+  </privatesale_invite_waitinglist>
+  <privatesale_invite_sendwaiting>
+    <reference name="content">
+      <block type="privatesale/invite" name="root" output="toHtml" template="privatesale/invite/waiting.phtml"/>
+    </reference>
+  </privatesale_invite_sendwaiting>
+  <checkout_onepage_index>
+    <reference name="checkout.onepage.billing">
+      <action method="setTemplate">
+        <template>privatesale/checkout/onepage/billing.phtml</template>
+      </action>
+      <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml"/>
+      <block type="core/template" name="persistent.remember.me.tooltip"
+             template="persistent/remember_me_tooltip.phtml"/>
+    </reference>
+  </checkout_onepage_index>
+  <privatesale_index_view>
+    <reference name="root">
+      <action method="setTemplate">
+        <template>page/1column.phtml</template>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="privatesale/events_view" name="privatesale.event.view" template="privatesale/event/view.phtml">
+        <block type='privatesale/events_view' before='-' name="privatesale.view.information"
+               template="privatesale/event/privatesale.phtml"/>
+        <block type="catalog/product_list" name="sale_private_list" template="catalog/product/list.phtml">
+          <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                 template="catalog/product/list/toolbar.phtml">
+            <block type="page/html_pager" name="product_list_toolbar_pager"/>
+          </block>
+          <action method="addColumnCountLayoutDepend">
+            <layout>empty</layout>
+            <count>6</count>
+          </action>
+          <action method="addColumnCountLayoutDepend">
+            <layout>one_column</layout>
+            <count>5</count>
+          </action>
+          <action method="addColumnCountLayoutDepend">
+            <layout>two_columns_left</layout>
+            <count>4</count>
+          </action>
+          <action method="addColumnCountLayoutDepend">
+            <layout>two_columns_right</layout>
+            <count>4</count>
+          </action>
+          <action method="addColumnCountLayoutDepend">
+            <layout>three_columns</layout>
+            <count>3</count>
+          </action>
+          <action method="setToolbarBlockName">
+            <name>product_list_toolbar</name>
+          </action>
+
+          <block type="core/text_list" name="product_list.name.after" as="name.after"/>
+          <block type="core/text_list" name="product_list.after" as="after"/>
+        </block>
+        <action method="setListCollection"/>
+      </block>
+    </reference>
+  </privatesale_index_view>
+</layout> 

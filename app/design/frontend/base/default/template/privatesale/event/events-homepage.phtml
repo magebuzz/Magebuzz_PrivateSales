@@ -1,0 +1,52 @@
+<?php
+$avaiEvents = $this->getAllEventsInHomePage();
+$_helper = Mage::helper('privatesale');
+?>
+<?php if (count($avaiEvents) > 0) : ?>
+  <h2 class="subtitle"><?php echo $this->__('Sales Events') ?></h2>
+  <div class="privatesale-events">
+    <?php $_columnCount = 3; ?>
+    <?php $i = 0;
+    foreach ($avaiEvents as $event): ?>
+      <?php if ($i++ % $_columnCount == 0): ?>
+        <ul class="sales-grid">
+      <?php endif ?>
+      <?php
+      $now_time = Mage::getModel('core/date')->timestamp(time());
+      if ($event['status'] == 2) {
+        $eventLabel = $this->__('Sale ends in ');
+        $end_time = Mage::getModel('core/date')->timestamp($event['end_date']);
+      } else if ($event['status'] == 1) {
+        $eventLabel = $this->__('Sale start in ');
+        $end_time = Mage::getModel('core/date')->timestamp($event['start_date']);
+      }
+      ?>
+      <li class="item">
+        <div class="div-information">
+          <div class="title-events-privatesale"><?php echo $event['title']; ?></div>
+          <div class="image-information">
+            <a <?php if ($event['status'] == 2): ?> href="<?php echo $_helper->getEventUrl($event); ?>" <?php endif; ?>
+              title="<?php echo $event['title'] ?>">
+              <img width="280" height="200" src="<?php echo $_helper->eventImage($event['image']); ?>">
+            </a>
+
+            <div class="price-save">
+              <span class="price"><?php echo $event['discount_amount'] . '%'; ?></span>
+            </div>
+          </div>
+          <div class="new-description">
+            <h3><?php echo $eventLabel; ?><span id="timeleft_<?php echo $event['event_id'] ?>" class="timeleft"> </span>
+            </h3>
+            <script type="text/javascript">
+              var dealTimeCounter_<?php echo $event['event_id']?> = new DealTimeCounter('<?php echo $now_time ?>', '<?php echo $end_time ?>', '<?php echo $event['event_id'] ?>');
+              dealTimeCounter_<?php echo $event['event_id']?>.setTimeleft('timeleft_<?php echo $event['event_id']?>');
+            </script>
+          </div>
+        </div>
+      </li>
+      <?php if ($i % $_columnCount == 0 || $i == count($avaiEvents)): ?>
+        </ul>
+      <?php endif ?>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>

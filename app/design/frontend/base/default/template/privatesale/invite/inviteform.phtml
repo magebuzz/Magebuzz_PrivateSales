@@ -1,0 +1,158 @@
+<?php if ($this->checkUserPermission()): ?>
+  <?php
+  $numberOfInvited = $this->getCountInvite();
+  $limit = Mage::getStoreConfig('privatesalesession/privatesale_options/number_of_invite');
+  if ($limit < 0) $limit = PHP_INT_MAX;
+  if ($numberOfInvited < $limit):
+    ?>
+    <form onsubmit="return checkBeforeSubmit()" action="<?php echo Mage::getBaseUrl() . 'privatesale/invite/invite' ?>"
+          method="post" id="invite_email_form">
+      <div class='fieldset'>
+        <h2 class='legend'><?php echo $this->__('Invite New User') ?></h2>
+        <ul class='form-list'>
+          <li class='fields'>
+            <div id="email_input" class="field">
+              <label for="email" class='required'><em>*</em><?php echo $this->__('Invite People at Email') ?></label>
+
+              <div id="email_row" class="input-box" style="width: 500px">
+                <input type="text" id="email" name="email[]" title="Invite other"
+                       class="input-text required-entry validate-email" maxlength="255" style="width:370px"/>
+                <img id="add_button" width="20px" height="20px"
+                     onclick="addNewField(this.parentElement.firstElementChild)"
+                     src="<?php echo $this->getSkinUrl('images/Privatesale/Add.png') ?>"/>
+
+                <div id="notification"></div>
+              </div>
+            </div>
+          </li>
+          <li class="fields">
+            <div id="invite_message" class="field">
+              <label for="message"><?php echo $this->__('Invitation Message') ?></label>
+
+              <div class="input-box">
+                <textarea id="message" name="message" rows="2"
+                          cols="20"><?php echo $this->__('Join with us, please.') ?></textarea>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <img height="21px" src="<?php echo $this->getSkinUrl('images/Privatesale/Verify.png') ?>" onclick="check()"/>
+        <button class="button"><span><span><?php echo $this->__('Invite') ?></span></span></button>
+      </div>
+    </form>
+    <script type="text/javascript">
+      //<![CDATA[
+      var ajaxRequest;
+      var deleteButton = new Element('img');
+      deleteButton.id = 'deleteButton';
+      deleteButton.src = '<?php echo $this->getSkinUrl('images/Privatesale/Remove.png') ?>';
+      deleteButton.height = "21";
+      deleteButton.setAttribute('onclick', 'removeField(this)', 0);
+      var i = <?php echo $numberOfInvited ?>;
+      var startValue = i;
+      var limit = <?php echo $limit ?>;
+
+      function checkBeforeSubmit() {
+        if (startValue == i && $('email').value == '') {
+          $('notification').innerHTML = 'Can submit none email!';
+          return false;
+        } else {
+          var url = '<?php echo $this->getUrl('privatesale/invite/check') ?>';
+          ajaxRequest = new Ajax.Request(url, {
+            method: 'post',
+            parameters: 'email=' + $('email').value,
+            onComplete: function (transport) {
+              if (transport.responseText == '0') {
+                $('notification').innerHTML = 'OK! You can invite this user';
+                $('invite_email_form').submit();
+              }
+              else if (transport.responseText == '1') {
+                $('notification').innerHTML = 'This user already have an account!';
+              }
+              else {
+                $('notification').innerHTML = 'Please fill in a valid email!';
+              }
+            },
+            onFailure: function () {
+              alert('System error');
+            },
+            onLoading: function () {
+              $('notification').innerHTML = 'Checking, please wait ...';
+            },
+          });
+          return false;
+        }
+      }
+
+      function removeField(obj) {
+        obj.parentElement.remove();
+        i--;
+      }
+
+      function addNewField(obj) {
+        if (startValue == i && $('email').value == '') {
+          $('notification').innerHTML = 'Don\'t leave this field empty!';
+          return false;
+        } else {
+          var url = '<?php echo $this->getUrl('privatesale/invite/check') ?>';
+          ajaxRequest = new Ajax.Request(url, {
+            method: 'post',
+            parameters: 'email=' + $('email').value,
+            onComplete: function (transport) {
+              if (transport.responseText == '0') {
+                i++;
+                $('notification').innerHTML = 'OK! You can invite this user! ';
+                if (i < limit) {
+                  $('email_input').appendChild(obj.parentElement.cloneNode(true));
+                  $('notification').remove();
+                  var temp = $('email').value;
+                  $('email').id = 'old';
+                  $('email').parentElement.previousElementSibling.firstElementChild.value = temp;
+                  $('email').parentElement.previousElementSibling.firstElementChild.readOnly = true;
+                  $('email').parentElement.previousElementSibling.appendChild(deleteButton.clone());
+                  $('add_button').remove();
+                  $('email').value = '';
+                } else {
+                  // $('email').readOnly = true;
+                  // $('add_button').remove();
+                  // $('email').parentElement.insertBefore(deleteButton.clone(), $('notification'));
+                  $('notification').innerHTML += 'Limit reached!';
+                }
+              }
+              else if (transport.responseText == '1') $('notification').innerHTML = 'This user already have an account!';
+              else $('notification').innerHTML = 'Please fill in a valid email!';
+            },
+            onFailure: function () {
+              alert('System error');
+            },
+            onLoading: function () {
+              $('notification').innerHTML = 'Checking, please wait ...';
+            },
+          });
+        }
+      }
+
+      function check() {
+        var url = '<?php echo $this->getUrl('privatesale/invite/check') ?>';
+        ajaxRequest = new Ajax.Request(url, {
+          method: 'post',
+          parameters: 'email=' + $('email').value,
+          onComplete: function (transport) {
+            if (transport.responseText == '0') {
+              $('notification').innerHTML = 'OK! You can invite this user';
+            }
+            else if (transport.responseText == '1') $('notification').innerHTML = 'This user already have an account!';
+            else $('notification').innerHTML = 'Please fill in a valid email!';
+          },
+          onFailure: function () {
+            alert('System error');
+          },
+          onLoading: function () {
+            $('notification').innerHTML = 'Checking, please wait ...';
+          },
+        });
+      }
+      //]]>
+    </script>
+  <?php endif; ?>
+<?php endif; ?>

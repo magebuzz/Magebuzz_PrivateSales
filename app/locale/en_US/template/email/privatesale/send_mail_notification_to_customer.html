@@ -1,0 +1,65 @@
+<!--@subject New Sales Events @-->
+
+<body style="background:#ffffff; font-family:Arial, Helvetica, sans-serif; font-size:13px; margin:0; padding:0;">
+<div style="background:#ffffff; font-family:Arial, Helvetica, sans-serif; font-size:13px; margin:0; padding:0;">
+  <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <tr>
+      <td align="left" valign="top" style="padding:0">
+        <!-- [ header starts here] -->
+        <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="622px" style="margin:0 auto;">
+          <tr>
+            <td colspan="2" valign="top" style="padding:0;">
+              <table cellspacing="0" cellpadding="10" width="100%" style="padding:10px 0;">
+                <tr>
+                  <td style="text-align:right;">
+                    <a title="Facebook" href="#" style="margin-right: 2px;display:inline;"><img border="0"
+                                                                                                src="{{skin url='css/magebuzz/privatesale/private-sale-facebook.png' _area='frontend'}}"
+                                                                                                alt="Facebook"/></a>
+                    <a title="RSS" href="#" style="margin-right: 2px;display:inline;"><img border="0"
+                                                                                           src="{{skin url='css/magebuzz/privatesale/private-sale-rss.png' _area='frontend'}}"
+                                                                                           alt="RSS"/></a>
+                    <a title="Twitter" href="#" style="display:inline;"><img border="0"
+                                                                             src="{{skin url='css/magebuzz/privatesale/private-sale-twitter.png' _area='frontend'}}"
+                                                                             alt="Twitter"/></a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- [ middle starts here] -->
+          <tr>
+            <td valign="top" colspan="4">
+              <h2 style="text-align:center;font-size:35px;font-weight:300;color:#00c1ea;margin: 0 0 13px;"> Dear {{var
+                customer_name}}</h2>
+
+              <p style="margin:0 0 15px;text-align:center;">Building relationship between customers and us is the
+                guideline in our business. Therefore, we always care about you- our believable customer. Currently, our
+                store is serving a special promotion campaign for member. Please, get it and bring benefit for you
+                back!</p>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" style="text-align:left;width: 30%;">
+              <a title="{{var title}}" href="{{var event_url}}"
+                 style="display:block;overflow:hidden;text-align:center;width:163px;"><img
+                style="max-height:153px;max-width:100%;border:0 none;" src="{{var image}}" alt="{{var title}}"/></a>
+            </td>
+            <td style="width:70%;">
+              <h2 style="margin:0 0 8px;"><a
+                style="font-size:16px;font-weight:700;color:#0072bc;text-transform: capitalize;text-decoration:none;"
+                title="{{var title}}" href="{{var event_url}}">{{var title}}</a></h2>
+
+              <p style="margin:0 0 8px;">{{var note}}</p>
+
+              <p style="margin:0 0 5px;"><span style="color:#0076a3;">Start : </span>{{var start_date}}</p>
+
+              <p style="margin:0 0 5px;"><span style="color:#0076a3;">End : </span>{{var end_date}}</p>
+
+              <p style="margin:0 0 5px;"><span style="color:#0076a3;">Status : </span>{{var status}}</p>
+
+              <p style="margin:0 0 5px;"><span style="color:#0076a3;">Sale off : </span>{{var discount_amount}}%</p>
+            </td>
+          </tr>
+        </table>
+</div>
+</body>

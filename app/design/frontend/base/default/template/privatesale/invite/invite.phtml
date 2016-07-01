@@ -1,0 +1,54 @@
+<?php if ($this->checkUserPermission()): ?>
+  <?php
+  echo $this->getMessagesBlock()->getGroupedHtml();
+  //$_inviteCollection = $this->getInviteCollection();
+  $_inviteCollection = $this->getCollection();
+  $i = 0;
+  ?>
+  <style>
+    td {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+    }
+  </style>
+  <html>
+  <body>
+  <div class="fieldset" id="invite_status" name="invite_status">
+    <div id="status_title" class="legend"><?php echo $this->__('Invitation Status') ?></div>
+    <div id="status_content" class="block-content">
+      <?php if (count($_inviteCollection) > 0) : ?>
+        <div name="invited_list">
+          <?php echo $this->getPagerHtml() ?>
+          <table id="invite-grid" class="data-table">
+            <colgroup>
+              <col width="1">
+              <col width="1">
+            </colgroup>
+            <thead>
+            <tr class="first last">
+              <th><?php echo $this->__('Email') ?></th>
+              <th><?php echo $this->__('Status') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($_inviteCollection as $key => $person): ?>
+              <tr>
+                <td><?php echo $person->getInvitedCustomerEmail(); ?></td>
+                <td> <?php
+                  if ($person->getInvitedCustomerId > 0) echo $this->__("Registered"); else echo $this->__("Not registered");
+                  ?></td>
+              </tr>
+            <?php endforeach ?>
+            </tbody>
+          </table>
+          <?php echo $this->getPagerHtml() ?>
+          <script type="text/javascript">decorateTable('invite-grid')</script>
+        </div>
+      <?php else : ?>
+        <div><?php echo $this->__('You have not invited anyone') ?></div>
+      <?php endif; ?>
+    </div>
+  </div>
+  </body>
+  </html>
+<?php endif; ?>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <tabs>
+    <magebuzz translate="label" module="privatesale">
+      <label>Magebuzz Add-ons</label>
+      <sort_order>400</sort_order>
+    </magebuzz>
+  </tabs>
+  <sections>
+    <privatesalesession translate="label" module="privatesale">
+      <class>separator-top</class>
+      <label>Private Sale</label>
+      <tab>magebuzz</tab>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <privatesale_options translate="label" module="privatesale">
+          <label>Private Sale Options</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>1</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <comment>
+            <![CDATA[
+              <div style="border:1px solid #ccc; padding:5px;">
+                <p style="color:#EB5E00">To show private sale events block to a CMS page or Static Block, please add following code: <code>{{block type="privatesale/privatesale" name ="privatesale.homepage" event_ids ="1,2,4,5,55" template="privatesale/event/events-homepage.phtml"}}</code></p>              
+                <p style="color:#EB5E00">If you want to use private sale events in a phtml file, please add this code: <code>$this->getLayout()->createBlock('privatesale/privatesale')->setEventIds('1,2,4,5,55')->setTemplate('privatesale/event/events-homepage.phtml')->toHtml();</code></p>
+                <p style="color:#EB5E00"> NOTE : event_ids is ID of Events Private Sale </p>
+              </div>
+            ]]>
+          </comment>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <force_user_to_login translate="label">
+              <label>Force Users To Login</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </force_user_to_login>
+            <redirect_to_landing translate="label">
+              <label>Redirect to landing page</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <force_user_to_login>1</force_user_to_login>
+              </depends>
+            </redirect_to_landing>
+            <cms_landing_page translate="label">
+              <label>Select landing page</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_cms_page</source_model>
+              <sort_order>3</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <redirect_to_landing>1</redirect_to_landing>
+              </depends>
+              <depends>
+                <force_user_to_login>1</force_user_to_login>
+              </depends>
+            </cms_landing_page>
+            <current_upcoming_events>
+              <label>Split current and upcoming events</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>4</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </current_upcoming_events>
+            <open_sign_up translate="label">
+              <label>Require Invitation Code</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>5</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </open_sign_up>
+            <default_event_image translate="label">
+              <label>Default Banner Event Image</label>
+              <frontend_type>image</frontend_type>
+              <backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+              <upload_dir config="system/filesystem/media" scope_info="1">privatesales/default</upload_dir>
+              <base_url type="media" scope_info="1">privatesales/default</base_url>
+              <sort_order>6</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </default_event_image>
+            <!--<show_banner translate="label">
+              <label>Show event image</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>7</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_banner>-->
+            <show_event_top_link translate="label">
+              <label>Display event page URL in top link</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>8</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </show_event_top_link>
+            <allow_user_to_invite>
+              <label>Allow User To Invite Friends</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>9</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </allow_user_to_invite>
+            <group_can_invite translate="label">
+              <label>Customer groups Can Invite Others</label>
+              <frontend_type>multiselect</frontend_type>
+              <source_model>privatesale/groups</source_model>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <allow_user_to_invite>1</allow_user_to_invite>
+              </depends>
+            </group_can_invite>
+            <number_of_invite translate="label">
+              <label>Invitation limit</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>11</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <allow_user_to_invite>1</allow_user_to_invite>
+              </depends>
+              <comment>Note : Leave 0 if users can not invite friend or -1 if users can invite unlimited friends</comment>
+            </number_of_invite>
+            <allow_pending_customer>
+              <label>Approve customer account after registration</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>12</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </allow_pending_customer>
+            <approval_notification_email_template translate="label">
+              <label>Approval notification email template</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>32</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <allow_pending_customer>1</allow_pending_customer>
+              </depends>
+            </approval_notification_email_template>
+            <rejection_notification_email_template translate="label">
+              <label>Rejection notification email template</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>33</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends>
+                <allow_pending_customer>1</allow_pending_customer>
+              </depends>
+            </rejection_notification_email_template>
+            <restricted_option>
+              <label>Configuration for restricted groups</label>
+              <frontend_type>select</frontend_type>
+              <source_model>privatesale/restrictedoptions</source_model>
+              <sort_order>12</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </restricted_option>
+						<include_jquery translate="label">
+              <label>Include jQuery library</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>100</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </include_jquery>
+          </fields>
+        </privatesale_options>
+        <email_options>
+          <label>Email Options</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>99</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <email_sender translate="label comment">
+              <label>Email Sender</label>
+              <comment><![CDATA[Select the email sender]]></comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_identity</source_model>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_sender>
+            <recieved_email translate="label">
+              <label>Send Emails To</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment>Email admin recieved notification.</comment>
+            </recieved_email>
+            <invite_email_template translate="label comment">
+              <label>Email Template for email list</label>
+              <comment><![CDATA[Select an email template]]></comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </invite_email_template>
+            <invitation_reject_email_template translate="label comment">
+              <label>Email Template for email Reject invitation code</label>
+              <comment><![CDATA[Select an email template]]></comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>4</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </invitation_reject_email_template>
+            <allow_send_notification>
+              <label>Send Notification To Admin</label>
+              <comment><![CDATA[Send notification to Admin when customer request invitation code]]></comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>5</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </allow_send_notification>
+            <send_request_invitation_template translate="label comment">
+              <label>Send Notification To Admin Template</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>6</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment><![CDATA[Select an email template]]></comment>
+            </send_request_invitation_template>
+            <admin_send_invite_code_template translate="label comment">
+              <label>Customer Invitation From Admin Email Template</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>6</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment><![CDATA[Select an email template]]></comment>
+            </admin_send_invite_code_template>
+            <send_email_when_have_new_event translate="label comment">
+              <label>Send Notification To Customer When Have New Events</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>6</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <comment><![CDATA[Select an email template]]></comment>
+            </send_email_when_have_new_event>
+          </fields>
+        </email_options>
+      </groups>
+    </privatesalesession>
+  </sections>
+</config>

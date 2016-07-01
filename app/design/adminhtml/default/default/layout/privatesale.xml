@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<layout>
+  <adminhtml_privatesale_event_index>
+    <reference name="content">
+      <block type="privatesale/adminhtml_event" name="events"/>
+    </reference>
+  </adminhtml_privatesale_event_index>
+  <adminhtml_privatesale_event_new>
+    <reference name="head">
+      <action method="setCanLoadExtJs">
+        <flag>1</flag>
+      </action>
+      <action method="setCanLoadRulesJs">
+        <flag>1</flag>
+      </action>
+    </reference>
+  </adminhtml_privatesale_event_new>
+  <adminhtml_privatesale_event_edit>
+    <reference name="head">
+      <action method="setCanLoadExtJs">
+        <flag>1</flag>
+      </action>
+      <action method="setCanLoadRulesJs">
+        <flag>1</flag>
+      </action>
+    </reference>
+  </adminhtml_privatesale_event_edit>
+  <adminhtml_privatesale_invite_index>
+    <reference name="content">
+      <block type="privatesale/adminhtml_invite_invite" name="invite_status"/>
+    </reference>
+  </adminhtml_privatesale_invite_index>
+  <adminhtml_privatesale_invite_form>
+    <reference name="content">
+      <block type="privatesale/adminhtml_invite_inviteformcontainer" name="invite_form"/>
+    </reference>
+  </adminhtml_privatesale_invite_form>
+  <adminhtml_privatesale_waiting_index>
+    <reference name="content">
+      <block type="privatesale/adminhtml_waiting_waiting" name="waiting_status"/>
+    </reference>
+  </adminhtml_privatesale_waiting_index>
+</layout>

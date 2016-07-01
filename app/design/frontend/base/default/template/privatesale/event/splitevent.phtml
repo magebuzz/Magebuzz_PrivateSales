@@ -1,0 +1,158 @@
+<?php
+$_help = Mage::helper('privatesale');
+?>
+<?php $avaiEvents = $this->getAllHappenningEvents(); ?>
+<?php if (count($avaiEvents)) : ?>
+  <div class="privatesale-list-happening-events">
+    <h2><?php echo $this->__('Happening Events'); ?></h2>
+
+    <div class="page-content">
+      <?php $homeUrl = Mage::getBaseUrl(); ?>
+      <ul class="list-events">
+        <?php $i = 0;
+        $durationArray = array() ?>
+        <?php foreach ($avaiEvents as $event) : ?>
+          <li>
+            <div class="col2-set">
+              <div class="col-1">
+                <a href="<?php echo $_helper->getEventUrl($event); ?>" title="<?php echo $event['title'] ?>">
+                  <img src="<?php echo $_helper->eventImage($event['image']); ?>">
+                </a>
+              </div>
+              <div class="col-2">
+                <ul class="event-info">
+                  <li class="field events-title">
+                    <h3><a href="<?php echo $_helper->getEventUrl($event); ?>"
+                           title="<?php echo $event['title'] ?>"><?php echo $event['title'] ?></a></h3>
+                  </li>
+                  <li class="fields">
+                    <div class="date-time-events">
+                      <div class="field start_date">
+                        <label><?php echo $this->__('Start Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['start_date'])); ?></h6>
+                      </div>
+                      <div class="field end_date">
+                        <label><?php echo $this->__('End Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['end_date'])); ?></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <?php
+                  $now_time = Mage::getModel('core/date')->timestamp(time());
+
+                  if ($event['status'] == 2) {
+                    $end_time = Mage::getModel('core/date')->timestamp($event['end_date']);
+                    $eventLabel = $this->__('Time left to end event');
+                  } elseif ($event['status'] == 1) {
+                    $end_time = Mage::getModel('core/date')->timestamp($event['start_date']);
+                    $eventLabel = $this->__('Time left to start event');
+                  }
+                  ?>
+                  <?php if ($event['note'] != ''): ?>
+                    <li class="field">
+                      <div class="information-time-left">
+                        <h4><?php echo $eventLabel; ?></h4>
+                        <span id="timeleft_<?php echo $event['event_id'] ?>" class="timeleft"> </span>
+                      </div>
+                      <div class="event-information">
+                        <h3><?php echo $this->__('Event Information:') ?></h3>
+
+                        <p><?php echo $event['note'] ?></p>
+                      </div>
+                      <script type="text/javascript">
+                        //<![CDATA[
+                        var dealTimeCounter_<?php echo $event['event_id']?> = new DealTimeCounter('<?php echo $now_time ?>', '<?php echo $end_time ?>', '<?php echo $event['event_id'] ?>');
+                        dealTimeCounter_<?php echo $event['event_id']?>.setTimeleft('timeleft_<?php echo $event['event_id']?>');
+                        //
+                      </script>
+                    </li>
+                  <?php endif; ?>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <?php $i += 1; ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+<?php endif; ?>
+
+<?php $avaiEvents = $this->getAllUpcommingEvents(); ?>
+<?php if (count($avaiEvents)) : ?>
+  <div class="privatesale-list-upcomming-events">
+    <h2><?php echo $this->__('Upcomming Events') ?></h2>
+
+    <div class="page-content">
+      <?php $homeUrl = Mage::getBaseUrl(); ?>
+      <ul class="list-events">
+        <?php $i = 0;
+        $durationArray = array() ?>
+        <?php foreach ($avaiEvents as $event) : ?>
+          <?php
+
+          $now_time = Mage::getModel('core/date')->timestamp(time());
+
+          if ($event['status'] == 2) {
+            $end_time = Mage::getModel('core/date')->timestamp($event['end_date']);
+            $eventLabel = $this->__('Time left to end event');
+          } else if ($event['status'] == 1) {
+            $end_time = Mage::getModel('core/date')->timestamp($event['start_date']);
+            $eventLabel = $this->__('Time left to start event');
+          }
+          ?>
+          <li>
+            <div class="col2-set">
+              <div class="col-1">
+                <a href="<?php echo $_helper->getEventUrl($event); ?>" title="<?php echo $event['title'] ?>">
+                  <img src="<?php echo $_helper->eventImage($event['image']); ?>">
+                </a>
+              </div>
+              <div class="col-2">
+                <ul class="event-info">
+                  <li class="field events-title">
+                    <h3><a href="<?php echo $_helper->getEventUrl($event); ?>"
+                           title="<?php echo $event['title'] ?>"><?php echo $event['title'] ?></a></h3>
+                  </li>
+                  <li class="fields">
+                    <div class="date-time-events">
+                      <div class="field start_date">
+                        <label><?php echo $this->__('Start Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['start_date'])); ?></h6>
+                      </div>
+                      <div class="field end_date">
+                        <label><?php echo $this->__('End Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['end_date'])); ?></h6>
+                      </div>
+                    </div>
+                  </li>
+
+                  <?php if ($event['note'] != ''): ?>
+                    <li class="field">
+                      <div class="information-time-left">
+                        <h4><?php echo $eventLabel; ?></h4>
+                        <span id="timeleft_<?php echo $event['event_id'] ?>" class="timeleft"> </span>
+                      </div>
+                      <div class="event-information">
+                        <h3><?php echo $this->__('Event Information:') ?></h3>
+
+                        <p><?php echo $event['note'] ?></p>
+                      </div>
+                      <script type="text/javascript">
+                        //<![CDATA[
+                        var dealTimeCounter_<?php echo $event['event_id']?> = new DealTimeCounter('<?php echo $now_time ?>', '<?php echo $end_time ?>', '<?php echo $event['event_id'] ?>');
+                        dealTimeCounter_<?php echo $event['event_id']?>.setTimeleft('timeleft_<?php echo $event['event_id']?>');
+                        //
+                      </script>
+                    </li>
+                  <?php endif; ?>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <?php $i += 1; ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+<?php endif; ?>

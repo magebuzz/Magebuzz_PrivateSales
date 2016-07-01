@@ -1,0 +1,22 @@
+<div class="fieldset" id="invite_status" name="invite_status">
+  <div id="subcribe_title" class="legend"><?php echo $this->__('Notification') ?></div>
+  <div class="box-account">
+    <form method="post" id="config_form" action="<?php echo Mage::getUrl('privatesale/index/changeConfig') ?>">
+      <ul class="form-list">
+        <li class="control">
+          <input type="checkbox" onchange='changeConfig()' name="receive_email_config" id="receive_email_config"
+                 class="checkbox" <?php if (Mage::helper('privatesale')->getUserConfig()): ?><?php echo 'checked' ?><?php endif; ?>/><label
+            for="receive_email_config"><?php echo $this->__('Receive new sales event notification') ?></label>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <script>
+    var config = $('receive_email_config');
+    var form = new VarienForm('config_form');
+    function changeConfig() {
+      form.submit();
+    }
+
+  </script>
+</div>

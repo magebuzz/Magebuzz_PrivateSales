@@ -1,0 +1,52 @@
+<div class="waiting-register" id="form-register">
+  <form action="javascript:submitWaitting();" method="post" id="form-validate-waiting">
+    <div class="page-title">
+      <h2 class="legend"><?php echo $this->__('Invitation Request') ?></h2>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div class="div-main-page">
+      <ul class="form-list">
+        <li>
+
+          <div class="input-box">
+            <label for="name_waiting" class="required"><em>*</em><?php echo $this->__('Full Name') ?></label>
+            <input type="text" name="name_waiting" id="name_waiting" value=""
+                   title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry"/>
+          </div>
+        </li>
+        <li>
+          <div class="input-box">
+            <label for="email_waiting" class="required"><em>*</em><?php echo $this->__('Email') ?></label>
+            <input type="text" name="email_waiting" id="email_waiting" title="<?php echo $this->__('Email') ?>"
+                   class="input-text required-entry validate-email"/>
+          </div>
+        </li>
+        <li>
+          <div class="input-box">
+            <p class="required a-left"><?php echo $this->__('* Required Fields') ?></p>
+          </div>
+        </li>
+      </ul>
+      <button type="submit" class="button" title="<?php echo $this->__('REGISTER NOW') ?>" name="step-in" id="step-in">
+        <span><span><?php echo $this->__('REGISTER NOW') ?></span></span></button>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  //<![CDATA[
+  var createForm = new VarienForm('form-register', true);
+
+  function submitWaitting() {
+    jQuery.fancybox.showLoading();
+    var dataformwaiting = jQuery('form#form-validate-waiting').serialize();
+    var ajaxurlsendwaitting = "<?php echo Mage::getBaseUrl() . 'privatesale/invite/sendwaiting?'?>" + dataformwaiting;
+    new Ajax.Request(ajaxurlsendwaitting, {
+      method: 'Get',
+      onSuccess: function (login_success_give) {
+        jQuery('.waiting-register').load("<?php echo $this->getUrl('privatesale/invite/waitinglist');?>", function () {
+          jQuery.fancybox.hideLoading();
+        });
+      }
+    });
+  }
+</script>

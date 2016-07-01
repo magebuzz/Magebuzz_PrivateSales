@@ -1,0 +1,4 @@
+<?php $messages = Mage::getSingleton("customer/session")->getMessages(TRUE);
+$html = $this->getLayout()->createBlock("core/messages")->setMessages($messages)->getGroupedHtml(); ?>
+<?php echo $html; ?>
+<?php echo $this->getLoginFormHtml(); ?>

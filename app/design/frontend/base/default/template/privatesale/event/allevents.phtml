@@ -1,0 +1,115 @@
+<?php
+$_helper = Mage::helper('privatesale');
+?>
+  <div class="page-title">
+    <h1><?php echo $this->__('Private Sale Events'); ?></h1>
+  </div>
+<?php $isSplitEvent = Mage::helper('privatesale')->getConfigSplitEvent(); ?>
+<?php $avaiEvents = $this->getAvailableEvents(); ?>
+<?php if (count($avaiEvents) == 0) : ?>
+  <p class="note-msg"><?php echo $this->__('There is no available event.'); ?></p>
+<?php else: ?>
+  <?php if ($isSplitEvent == 0): ?>
+    <div class="page-content">
+      <?php $avaiEvents = $this->getAvailableEvents(); ?>
+      <?php $homeUrl = Mage::getBaseUrl(); ?>
+      <ul class="list-events">
+        <?php $i = 0;
+        $durationArray = array() ?>
+        <?php foreach ($avaiEvents as $event) : ?>
+          <?php
+          $item = $event;
+          $now_time = Mage::getModel('core/date')->timestamp(time());
+
+          if ($item['status'] == 2) {
+            $end_time = Mage::getModel('core/date')->timestamp($item['end_date']);
+            $duration = $end_time - $now_time;
+          } else if ($item['status'] == 1) {
+            $end_time = Mage::getModel('core/date')->timestamp($item['start_date']);
+            $duration = $end_time - $now_time;
+          }
+          $durationArray[] = $duration;
+          $day = floor($duration / 86400);
+          $temp = 86400 * $day;
+          $hour = floor(($duration - $temp) / 3600);
+          $temp += 3600 * $hour;
+          $minute = floor(($duration - $temp) / 60);
+          $temp += 60 * $minute;
+          $second = $duration - $temp;
+
+          ?>
+          <?php $now_time = Mage::getModel('core/date')->timestamp(time()); // var_dump($now_time)?>
+          <?php $end_time = Mage::getModel('core/date')->timestamp($item['end_date']); //var_dump($end_time);?>
+          <li>
+            <div class="col2-set">
+              <div class="col-1">
+                <a href="<?php echo $_helper->getEventUrl($event); ?>" title="<?php echo $event['title'] ?>">
+                  <img src="<?php echo $_helper->eventImage($event['image']); ?>">
+                </a>
+              </div>
+              <div class="col-2">
+                <ul class="event-info">
+                  <li class="field events-title">
+                    <h3><a href="<?php echo $_helper->getEventUrl($event); ?>"
+                           title="<?php echo $event['title'] ?>"><?php echo $event['title'] ?></a></h3>
+                  </li>
+                  <li class="fields">
+                    <div class="date-time-events">
+                      <div class="field start_date">
+                        <label><?php echo $this->__('Start Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['start_date'])); ?></h6>
+                      </div>
+                      <div class="field end_date">
+                        <label><?php echo $this->__('End Date:') ?></label>
+                        <h6><?php echo date('F j, Y, H:i:s', Mage::getModel('core/date')->gmtTimestamp($event['end_date'])); ?></h6>
+                      </div>
+                    </div>
+                  </li>
+                  <?php
+                  if ($event['status'] == 2) {
+                    $end_time = Mage::getModel('core/date')->timestamp($event['end_date']);
+                    $eventLabel = $this->__('Time left to end event');
+                  } elseif ($event['status'] == 1) {
+                    $end_time = Mage::getModel('core/date')->timestamp($event['start_date']);
+                    $eventLabel = $this->__('Time left to start event');
+                  }
+                  ?>
+
+                  <li class="field">
+                    <div class="information-time-left">
+                      <h4><?php echo $eventLabel; ?></h4>
+                      <span id="timeleft_<?php echo $event['event_id'] ?>" class="timeleft"> </span>
+                    </div>
+                    <?php if ($event['note'] != ''): ?>
+                      <div class="event-information">
+                        <h3><?php echo $this->__('Event Information:') ?></h3>
+
+                        <p><?php echo $event['note'] ?></p>
+                      </div>
+                    <?php endif; ?>
+                    <script type="text/javascript">
+                      //<![CDATA[
+                      var dealTimeCounter_<?php echo $event['event_id']?> = new DealTimeCounter('<?php echo $now_time ?>', '<?php echo $end_time ?>', '<?php echo $event['event_id'] ?>');
+                      dealTimeCounter_<?php echo $event['event_id']?>.setTimeleft('timeleft_<?php echo $event['event_id']?>');
+                      //
+                    </script>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </li>
+          <?php $i += 1; ?>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  <?php else: ?>
+    <?php require_once('splitevent.phtml'); ?>
+  <?php endif ?>
+  <script type="text/javascript">
+    //<![CDATA[
+    var dealTimeCounter_<?php echo $event['event_id']?> = new DealTimeCounter('<?php echo $now_time ?>', '<?php echo $end_time ?>', '<?php echo $event['event_id'] ?>');
+    dealTimeCounter_<?php echo $event['event_id']?>.setTimeleft('timeleft_<?php echo $event['event_id']?>');
+    //
+  </script>
+<?php endif; ?>
